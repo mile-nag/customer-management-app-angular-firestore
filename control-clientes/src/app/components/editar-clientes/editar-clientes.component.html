@@ -1,1 +1,132 @@
-<p>editar-clientes works!</p>
+<header id="main-header" class="py-2 bg-info text-white">
+  <div class="container">
+    <h1><i class="bi bi-person"></i> Editar</h1>
+  </div>
+</header>
+
+<form #clienteForm="ngForm" (ngSubmit)="guardar(clienteForm)">
+  <!-- Botones -->
+  <section id="actions" class="py-4 mb-4">
+    <div class="container d-flex justify-content-between">
+      <a [routerLink]="['/']" class="btn btn-primary">
+        <i class="bi bi-arrow-left"></i> Volver al inicio
+      </a>
+      <button type="submit" class="btn btn-success">
+        <i class="bi bi-check"></i> Guardar
+      </button>
+      <a href="#" (click)="eliminar()" class="btn btn-danger">
+        <i class="bi bi-trash"></i> Eliminar
+      </a>
+    </div>
+  </section>
+
+  <section id="details">
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          <h4>Editar cliente</h4>
+        </div>
+        <div class="card-body">
+          <!-- Nombre -->
+          <div class="d-flex align-items-center mb-3 mt-3">
+            <label
+              for="nombre"
+              class="form-label me-2"
+              style="min-width: 100px"
+            >
+              Nombre
+            </label>
+            <div class="col-sm-9">
+              <input
+                type="text"
+                id="nombre"
+                name="nombre"
+                class="form-control"
+                minlength="2"
+                [(ngModel)]="cliente.nombre"
+                #nombre="ngModel"
+                required
+              />
+              @if(nombre.invalid && nombre.touched){
+              <div class="text-danger">
+                El nombre es requerido y debe tener al menos dos caracteres.
+              </div>
+              }
+            </div>
+          </div>
+          <!-- Apellido -->
+          <div class="d-flex align-items-center mb-3">
+            <label
+              for="apellido"
+              class="form-label me-2"
+              style="min-width: 100px"
+            >
+              Apellido
+            </label>
+            <div class="col-sm-9">
+              <input
+                type="text"
+                id="apellido"
+                name="apellido"
+                class="form-control"
+                minlength="2"
+                [(ngModel)]="cliente.apellido"
+                #apellido="ngModel"
+                required
+              />
+              @if(apellido.invalid && apellido.touched){
+              <div class="text-danger">
+                El apellido es requerido y debe tener al menos dos caracteres.
+              </div>
+              }
+            </div>
+          </div>
+          <!--- Email -->
+          <div class="d-flex align-items-center mb-3">
+            <label for="email" class="form-label me-2" style="min-width: 100px">
+              Email
+            </label>
+            <div class="col-sm-9">
+              <input
+                type="text"
+                id="email"
+                name="email"
+                class="form-control"
+                [(ngModel)]="cliente.email"
+                #email="ngModel"
+                required
+              />
+              @if(email.invalid && email.touched){
+              <div class="text-danger">Por favor, ingrese un email válido.</div>
+              }
+            </div>
+          </div>
+          <!-- Saldo -->
+          <div class="d-flex align-items-center mb-3">
+            <label for="saldo" class="form-label me-2" style="min-width: 100px">
+              Saldo
+            </label>
+            <div class="col-sm-9">
+              <input
+                type="number"
+                id="saldo"
+                name="saldo"
+                class="form-control"
+                required
+                minlength="0.01"
+                step="0.01"
+                [(ngModel)]="cliente.saldo"
+                #saldo="ngModel"
+              />
+              @if(saldo.invalid && saldo.touched){
+              <div class="text-danger">
+                El saldo es requerido y debe ser mayor a cero.
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</form>
