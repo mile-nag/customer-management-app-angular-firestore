@@ -18,6 +18,15 @@ export class LoginComponent {
     private loginService: LoginService
   ) { }
 
+  ngOnInit() {
+    //Evita que se muestre el formulario para iniciar sesión si el usuario ya esta logueado.
+    this.loginService.getAuthState().subscribe(usuario => {
+      if (usuario) {
+        this.router.navigate(['/']);
+      }
+    });
+  }
+
   login() {
     if (this.email && this.password) {
       this.loginService.login(this.email, this.password)
